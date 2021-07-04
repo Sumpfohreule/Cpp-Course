@@ -1,0 +1,122 @@
+#include "graph.h"
+#include <gtest/gtest.h>
+
+using namespace std;
+
+TEST(GraphV, ReturnZeroOnEmptyGraph) {
+    Graph g = Graph();
+	EXPECT_EQ(g.V(), 0);
+}
+
+TEST(GraphV, ReturnCountForVertices) {
+    Graph g = Graph(10);
+	EXPECT_EQ(g.V(), 10);
+}
+
+TEST(GraphAddEdge, ZeroEdges) {
+    Graph g = Graph(10);
+    EXPECT_EQ(g.E(), 0);
+}
+
+TEST(GraphAddEdge, MultipleEdges) {
+    Graph g = Graph(10);
+    g.AddEdge(0, 1);
+    g.AddEdge(1, 2);
+    g.AddEdge(2, 3);
+    EXPECT_EQ(g.E(), 3);
+}
+
+TEST(GraphAdjacent, NoEdgeBetweenNodes) {
+    Graph g = Graph(10);
+    EXPECT_FALSE(g.Adjacent(1, 5));
+}
+
+TEST(GraphAdjacent, EdgeBetweenNodes) {
+    Graph g = Graph(10);
+    g.AddEdge(1, 5);
+    EXPECT_TRUE(g.Adjacent(1, 5));
+}
+
+TEST(GraphEdgeValue, DefaultsToMinus1) {
+    Graph g = Graph(10);
+    g.AddEdge(1, 5);
+    EXPECT_EQ(g.GetEdgeValue(1, 5), -1);
+}
+
+TEST(GraphEdgeValue, SetAndGetEdgeValue) {
+    Graph g = Graph(10);
+    g.AddEdge(1, 5);
+    g.SetEdgeValue(1, 5, 6);
+    EXPECT_EQ(g.GetEdgeValue(1,5), 6);
+}
+
+TEST(GraphDeleteEdge, DeleteExisting) {
+    Graph g = Graph(2);
+    g.AddEdge(0, 1);
+    g.DeleteEdge(0, 1);
+    EXPECT_EQ(g.E(), 0);
+}
+
+TEST(EdgeConstructor, ParameterOrderDoesNotMatter) {
+    Edge small_big = Edge(3, 10);
+    Edge big_small = Edge(10, 3);
+    EXPECT_TRUE(small_big == big_small);
+}
+
+TEST(EdgeComparison, Smaller) {
+    Edge smaller_edge = Edge(5, 10);
+    Edge bigger_edge = Edge(6, 7);
+    Edge left_equal_larger_edge = Edge(5, 13);
+    Edge left_equal_smaller_edge = Edge(5, 8);
+
+    EXPECT_TRUE(smaller_edge < bigger_edge);
+    EXPECT_TRUE(smaller_edge < left_equal_larger_edge);
+    EXPECT_FALSE(smaller_edge < left_equal_smaller_edge);
+}
+
+TEST(EdgeComparison, Larger) {
+    Edge smaller_edge = Edge(5, 10);
+    Edge bigger_edge = Edge(6, 7);
+    Edge left_equal_larger_edge = Edge(5, 13);
+    Edge left_equal_smaller_edge = Edge(5, 8);
+
+    EXPECT_FALSE(smaller_edge > bigger_edge);
+    EXPECT_FALSE(smaller_edge > left_equal_larger_edge);
+    EXPECT_TRUE(smaller_edge > left_equal_smaller_edge);
+}
+
+TEST(EdgeComparison, EqualUnEqual) {
+    Edge edge = Edge(1, 4);
+    Edge equal_edge = Edge(1, 4);
+    Edge unequal_edge_1 = Edge(3, 2);
+    Edge unequal_edge_2 = Edge(6, 4);
+    Edge unequal_edge_3 = Edge(1, 6);
+
+    EXPECT_EQ(edge, equal_edge);
+    EXPECT_NE(edge, unequal_edge_1);
+    EXPECT_NE(edge, unequal_edge_2);
+    EXPECT_NE(edge, unequal_edge_3);
+}
+
+TEST(NodeNeighbors, NodeWithoutNeighbors) {
+    Graph g = Graph(10);
+    vector<int> empty_vector;
+    EXPECT_EQ(g.Neighbors(3), empty_vector);
+}
+
+TEST(NodeNeighbors, NodeWithMultipleNeighbors) {
+    Graph g = Graph(10);
+    g.AddEdge(1, 3);
+    g.AddEdge(1, 5);
+    g.AddEdge(1, 9);
+    vector<int> neighbor_nodes;
+    neighbor_nodes.push_back(3);
+    neighbor_nodes.push_back(5);
+    neighbor_nodes.push_back(9);
+    EXPECT_EQ(g.Neighbors(3), neighbor_nodes);
+}
+
+int main(int argc, char **argv) {
+  ::testing::InitGoogleTest(&argc, argv);
+  return RUN_ALL_TESTS();
+}
