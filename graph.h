@@ -12,6 +12,8 @@ class Edge {
         Edge(int, int);
         int node1();
         int node2();
+        bool ConnectsWith(int);
+        int GetOtherNode(int);
         friend bool operator<(const Edge& left, const Edge& right);
         friend bool operator>(const Edge& left, const Edge& right);
         friend bool operator==(const Edge& left, const Edge& right);

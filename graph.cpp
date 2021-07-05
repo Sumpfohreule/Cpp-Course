@@ -20,6 +20,20 @@ int Edge::node2() {
     return(this->node_2);
 }
 
+bool Edge::ConnectsWith(int node) {
+    return(this->node_1 == node || this->node_2 == node);
+}
+
+int Edge::GetOtherNode(int node) {
+    if (this->node_1 == node) {
+        return(this->node_2);
+    } else if (this->node_2 == node) {
+        return(this->node_1);
+    } else {
+        return(-1);
+    }
+}
+
 bool operator<(const Edge& left, const Edge& right) {
     if (left.node_1 != right.node_1) {
         return(left.node_1 < right.node_1);
@@ -87,7 +101,13 @@ bool Graph::Adjacent(int node_1, int node_2) {
 
 vector<int> Graph::Neighbors(int node) {
     vector<int> neighbors;
-    //for_each(this->edges.begin(), this->edges.end(), 
+    map<Edge, int>::iterator it;
+    for (it = this->edges.begin(); it != this->edges.end(); it++) {
+        Edge edge = it->first;
+        if (edge.ConnectsWith(node)) {
+            neighbors.push_back(edge.GetOtherNode(node));
+        }
+    }
     return(neighbors);
 }
 

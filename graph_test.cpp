@@ -113,7 +113,7 @@ TEST(NodeNeighbors, NodeWithMultipleNeighbors) {
     neighbor_nodes.push_back(3);
     neighbor_nodes.push_back(5);
     neighbor_nodes.push_back(9);
-    EXPECT_EQ(g.Neighbors(3), neighbor_nodes);
+    EXPECT_EQ(g.Neighbors(1), neighbor_nodes);
 }
 
 int main(int argc, char **argv) {
