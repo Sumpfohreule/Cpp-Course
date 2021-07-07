@@ -1,4 +1,6 @@
 #ifndef GRAPH_H
+#define GRAPH_H
+
 #include <vector>
 #include <map>
 #include <cstdlib>

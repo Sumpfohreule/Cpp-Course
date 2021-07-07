@@ -2,6 +2,7 @@
 #define PRIORITY_QUEUE_H
 
 #include <vector>
+#include <algorithm>
 
 template <typename T>
 class PriorityQueue {
