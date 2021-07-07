@@ -55,6 +55,7 @@ bool operator!=(const Edge& left, const Edge& right) {
 }
 
 Graph::Graph() {}
+
 Graph::Graph(int node_count) {
     vector<int> nodes;
     nodes.reserve(node_count);
@@ -63,6 +64,17 @@ Graph::Graph(int node_count) {
         nodes.push_back(i);
     }
     this->nodes = nodes;
+}
+
+void Graph::AddRandomEdges(float density) {
+    srand(time(nullptr));
+    for (int i = 0; i < this->V(); i++) {
+        for (int j = i + 1; j < this->V(); j++) {
+            if (i != j && (static_cast<float>(rand()) / static_cast<float>(RAND_MAX)) < density) {
+                this->AddEdge(i, j);
+            }
+        }
+    }
 }
 
 bool Graph::EdgeHasNode(Edge edge, int node) {

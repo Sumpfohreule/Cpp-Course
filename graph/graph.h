@@ -1,6 +1,8 @@
 #ifndef GRAPH_H
 #include <vector>
 #include <map>
+#include <cstdlib>
+#include <ctime>
 
 class Edge {
     private:
@@ -29,6 +31,7 @@ class Graph {
     public:
         Graph();
         Graph(int);
+        void AddRandomEdges(float);
 
         void AddEdge(int, int);
         void DeleteEdge(int, int);
@@ -40,8 +43,5 @@ class Graph {
         int V();
         int E();
 };
-
-     
-
 
 #endif
