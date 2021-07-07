@@ -10,10 +10,17 @@ class Edge {
     private:
         int node_1;
         int node_2;
-        int value;
+        int weight;
+
+        void OrderNodes();
     public:
-        Edge(int, int, int);
-        Edge(int, int);
+        Edge(int node_1, int node_2, int weight) : node_1(node_1), node_2(node_2), weight(weight) {
+            this->OrderNodes();
+        };
+        Edge(int node_1, int node_2) : node_1(node_1), node_2(node_2) {
+            this->OrderNodes();
+        };
+
         int node1();
         int node2();
         bool ConnectsWith(int);

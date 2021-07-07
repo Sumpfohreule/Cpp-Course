@@ -2,13 +2,9 @@
 
 using namespace std;
 
-Edge::Edge(int node_1, int node_2) {
-    if (node_1 < node_2) {
-        this->node_1 = node_1;
-        this->node_2 = node_2;
-    } else {
-        this->node_1 = node_2;
-        this->node_2 = node_1;
+void Edge::OrderNodes() {
+    if (this->node_1 > this->node_2) {
+        swap(this->node_1, this->node_2);
     }
 }
 
