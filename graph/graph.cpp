@@ -90,8 +90,12 @@ int Graph::GetConnectedNode(Edge edge, int node) {
 }
 
 void Graph::AddEdge(int node_1, int node_2) {
-    Edge edge = Edge(node_1, node_2);
-    this->edges.insert(pair<Edge, int>(edge, -1));
+    this->AddEdge(node_1, node_2, -1);
+}
+
+void Graph::AddEdge(int node_1, int node_2, int weight) {
+    Edge edge = Edge(node_1, node_2, weight);
+    this->edges.insert(pair<Edge, int>(edge, weight));
 }
 
 void Graph::DeleteEdge(int node_1, int node_2) {

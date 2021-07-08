@@ -26,6 +26,13 @@ TEST(GraphAddEdge, MultipleEdges) {
     EXPECT_EQ(g.E(), 3);
 }
 
+TEST(GraphAddEdge, AdddingSameEdgeDifferentWeights) {
+    Graph g = Graph(10);
+    g.AddEdge(0, 1, 5);
+    g.AddEdge(0, 1, 9);
+    EXPECT_EQ(g.E(), 1);
+}
+
 TEST(GraphAdjacent, NoEdgeBetweenNodes) {
     Graph g = Graph(10);
     EXPECT_FALSE(g.Adjacent(1, 5));
@@ -53,6 +60,13 @@ TEST(GraphEdgeValue, SetAndGetEdgeValue) {
 TEST(GraphDeleteEdge, DeleteExisting) {
     Graph g = Graph(2);
     g.AddEdge(0, 1);
+    g.DeleteEdge(0, 1);
+    EXPECT_EQ(g.E(), 0);
+}
+
+TEST(GraphDeleteEdge, DeleteEdgeWithWeight) {
+    Graph g = Graph(2);
+    g.AddEdge(0, 1, 5);
     g.DeleteEdge(0, 1);
     EXPECT_EQ(g.E(), 0);
 }

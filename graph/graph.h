@@ -44,6 +44,7 @@ class Graph {
         void AddRandomEdges(float);
 
         void AddEdge(int, int);
+        void AddEdge(int, int, int);
         void DeleteEdge(int, int);
         bool Adjacent(int, int);
         std::vector<int> Neighbors(int);
