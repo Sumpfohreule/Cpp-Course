@@ -67,14 +67,12 @@ void Graph::DeleteEdge(int node_1, int node_2) {
 }
 
 bool Graph::Adjacent(int node_1, int node_2) {
-    bool adjacent = false;
-    for (vector<Edge>::iterator it = this->edges.begin(); it != this->edges.end(); it++) {
-        if ((*it).node1() == node_1 && (*it).node2() == node_2) {
-            adjacent = true;
-            break;
-        }
+    vector<Edge>::iterator it = this->FindEdge(node_1, node_2);
+    if (it != this->edges.end()) {
+        return(true);
+    } else {
+        return(false);
     }
-    return(adjacent);
 }
 
 vector<int> Graph::Neighbors(int node) {
