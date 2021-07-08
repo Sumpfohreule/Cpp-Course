@@ -1,4 +1,5 @@
 #include "graph.h"
+#include "edge/edge.h"
 #include <gtest/gtest.h>
 
 using namespace std;
