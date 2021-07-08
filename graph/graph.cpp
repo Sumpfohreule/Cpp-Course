@@ -53,30 +53,35 @@ void Graph::AddEdge(int node_1, int node_2) {
 }
 
 void Graph::AddEdge(int node_1, int node_2, int weight) {
-    Edge edge = Edge(node_1, node_2, weight);
-    this->edges.insert(pair<Edge, int>(edge, weight));
+    if (!this->Adjacent(node_1, node_2)) {
+        Edge edge = Edge(node_1, node_2, weight);
+        this->edges.push_back(edge);
+    }
 }
 
 void Graph::DeleteEdge(int node_1, int node_2) {
-    Edge delete_edge = Edge(node_1, node_2);
-    this->edges.erase(delete_edge);
+    vector<Edge>::iterator it = this->FindEdge(node_1, node_2);
+    if (it != this->edges.end()) {
+        this->edges.erase(it);
+    }
 }
 
 bool Graph::Adjacent(int node_1, int node_2) {
-    Edge lookup = Edge(node_1, node_2);
-    map<Edge, int>::iterator it = this->edges.find(lookup);
-    if (it != this->edges.end()) {
-        return(true);
-    } else {
-        return(false);
+    bool adjacent = false;
+    for (vector<Edge>::iterator it = this->edges.begin(); it != this->edges.end(); it++) {
+        if ((*it).node1() == node_1 && (*it).node2() == node_2) {
+            adjacent = true;
+            break;
+        }
     }
+    return(adjacent);
 }
 
 vector<int> Graph::Neighbors(int node) {
     vector<int> neighbors;
-    map<Edge, int>::iterator it;
+    vector<Edge>::iterator it;
     for (it = this->edges.begin(); it != this->edges.end(); it++) {
-        Edge edge = it->first;
+        Edge edge = *it;
         if (edge.ConnectsWith(node)) {
             neighbors.push_back(edge.GetOtherNode(node));
         }
@@ -84,16 +89,19 @@ vector<int> Graph::Neighbors(int node) {
     return(neighbors);
 }
 
-
-
 void Graph::SetEdgeValue(int node_1, int node_2, int value) {
     Edge lookup = Edge(node_1, node_2);
-    this->edges.at(lookup) = value;
+    vector<Edge>::iterator it = find(this->edges.begin(), this->edges.end(), lookup);
+    *it = Edge(node_1, node_2, value);
 }
 
 int Graph::GetEdgeValue(int node_1, int node_2) {
-    Edge lookup = Edge(node_1, node_2);
-    return(this->edges.at(lookup));
+    vector<Edge>::iterator it = this->FindEdge(node_1, node_2);
+    if (it != this->edges.end()) {
+        return((*it).get_weight());
+    } else {
+        return(-1);
+    }
 }
 
 
