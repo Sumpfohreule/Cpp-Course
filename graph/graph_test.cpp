@@ -63,26 +63,34 @@ TEST(EdgeConstructor, ParameterOrderDoesNotMatter) {
     EXPECT_TRUE(small_big == big_small);
 }
 
-TEST(EdgeComparison, Smaller) {
+TEST(EdgeComparison, LeftSmaller) {
     Edge smaller_edge = Edge(5, 10);
-    Edge bigger_edge = Edge(6, 7);
-    Edge left_equal_larger_edge = Edge(5, 13);
-    Edge left_equal_smaller_edge = Edge(5, 8);
+    Edge larger_edge = Edge(6, 8);
+    Edge larger_edge_2 = Edge(6, 10);
 
-    EXPECT_TRUE(smaller_edge < bigger_edge);
-    EXPECT_TRUE(smaller_edge < left_equal_larger_edge);
-    EXPECT_FALSE(smaller_edge < left_equal_smaller_edge);
+    EXPECT_TRUE(smaller_edge < larger_edge);
+    EXPECT_TRUE(smaller_edge < larger_edge_2);
 }
 
-TEST(EdgeComparison, Larger) {
+TEST(EdgeComparison, RightSmaller) {
     Edge smaller_edge = Edge(5, 10);
-    Edge bigger_edge = Edge(6, 7);
-    Edge left_equal_larger_edge = Edge(5, 13);
-    Edge left_equal_smaller_edge = Edge(5, 8);
+    Edge larger_edge = Edge(5, 15);
 
-    EXPECT_FALSE(smaller_edge > bigger_edge);
-    EXPECT_FALSE(smaller_edge > left_equal_larger_edge);
-    EXPECT_TRUE(smaller_edge > left_equal_smaller_edge);
+    EXPECT_TRUE(smaller_edge < larger_edge);
+}
+
+TEST(EdgeComparison, LeftLarger) {
+    Edge smaller_edge = Edge(5, 10);
+    Edge larger_edge = Edge(6, 7);
+
+    EXPECT_TRUE(larger_edge > smaller_edge);
+}
+
+TEST(EdgeComparison, RightLarger) {
+    Edge smaller_edge = Edge(5, 10);
+    Edge larger_edge = Edge(5, 13);
+
+    EXPECT_TRUE(larger_edge > smaller_edge);
 }
 
 TEST(EdgeComparison, EqualUnEqual) {
