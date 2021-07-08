@@ -98,6 +98,15 @@ TEST(EdgeComparison, EqualUnEqual) {
     EXPECT_NE(edge, unequal_edge_3);
 }
 
+TEST(EdgeComparison, WeightPrecedesNodes) {
+    Edge edge = Edge(10, 8, 5);
+    Edge smaller_edge = Edge(10, 11, 1);
+    Edge larger_edge = Edge(1, 2, 10);
+
+    EXPECT_TRUE(edge < larger_edge);
+    EXPECT_TRUE(edge > smaller_edge);
+}
+
 TEST(NodeNeighbors, NodeWithoutNeighbors) {
     Graph g = Graph(10);
     vector<int> empty_vector;
