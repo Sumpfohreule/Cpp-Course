@@ -27,7 +27,7 @@ TEST(GraphAddEdge, MultipleEdges) {
     EXPECT_EQ(g.E(), 3);
 }
 
-TEST(GraphAddEdge, AdddingSameEdgeDifferentWeights) {
+TEST(GraphAddEdge, AddingSameEdgeDifferentWeights) {
     Graph g = Graph(10);
     g.AddEdge(0, 1, 5);
     g.AddEdge(0, 1, 9);
