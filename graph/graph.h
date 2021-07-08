@@ -13,6 +13,7 @@ class Graph {
         std::map<Edge, int> edges;
         bool EdgeHasNode(Edge, int);
         int GetConnectedNode(Edge, int);
+        std::vector<Edge>::iterator FindEdge(int, int);
     public:
         Graph();
         Graph(int);

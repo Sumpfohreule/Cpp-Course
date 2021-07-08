@@ -39,6 +39,15 @@ int Graph::GetConnectedNode(Edge edge, int node) {
     }
 }
 
+vector<Edge>::iterator Graph::FindEdge(int node_1, int node_2) {
+    for (vector<Edge>::iterator it = this->edges.begin(); it != this->edges.end(); it++) {
+        if ((*it).node1() == node_1 && (*it).node2() == node_2) {
+            return(it);
+        }
+    }
+    return(this->edges.end());
+}
+
 void Graph::AddEdge(int node_1, int node_2) {
     this->AddEdge(node_1, node_2, -1);
 }
