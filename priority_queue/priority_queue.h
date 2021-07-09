@@ -11,6 +11,7 @@ class PriorityQueue {
     public:
         PriorityQueue<T>();
         void Push(T);
+        void Push(std::vector<T>);
         T Pop();
         bool Contains(T);
         unsigned Size();
@@ -18,12 +19,19 @@ class PriorityQueue {
 };
 
 template <typename T>
-PriorityQueue<T>::PriorityQueue(){
-}
+PriorityQueue<T>::PriorityQueue() {}
 
 template <typename T>
 void PriorityQueue<T>::Push(T element) {
     this->queue.push_back(element);
+    std::sort(this->queue.begin(), this->queue.end(), std::greater<T>());
+}
+
+template <typename T>
+void PriorityQueue<T>::Push(std::vector<T> elements) {
+    for (typename std::vector<T>::iterator it = elements.begin(); it != elements.end(); it++) {
+        this->queue.push_back(*it);
+    }
     std::sort(this->queue.begin(), this->queue.end(), std::greater<T>());
 }
 

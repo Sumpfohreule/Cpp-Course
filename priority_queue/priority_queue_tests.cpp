@@ -1,6 +1,8 @@
 #include "gtest/gtest.h"
 #include "priority_queue.h"
+#include "../graph/edge/edge.h"
 #include <ctime>
+#include <vector>
 
 TEST(Contains, SingleElement) {
     PriorityQueue<int> queue = PriorityQueue<int>();
@@ -58,6 +60,31 @@ TEST(Pop, UnorderedElements) {
     EXPECT_EQ(queue.Pop(), 2);
     EXPECT_EQ(queue.Pop(), 3);
     EXPECT_EQ(queue.Pop(), 4);
+}
+
+TEST(PushVector, InitializeMultipleValues) {
+    PriorityQueue<int> queue = PriorityQueue<int>();
+    std::vector<int> edges = {4, 1, 7};
+    queue.Push(edges);
+    EXPECT_EQ(queue.Size(), 3);
+    EXPECT_EQ(queue.Pop(), 1);
+    EXPECT_EQ(queue.Pop(), 4);
+    EXPECT_EQ(queue.Pop(), 7);
+}
+
+TEST(PushVector, SingleToSingle) {
+    PriorityQueue<int> queue = PriorityQueue<int>();
+    queue.Push(1);
+    std::vector<int> value = {2};
+    queue.Push(value);
+    EXPECT_EQ(queue.Size(), 2);
+}
+
+TEST(Edge, SingleEdge) {
+    PriorityQueue<Edge> queue = PriorityQueue<Edge>();
+    Edge edge = Edge(0, 1);
+    queue.Push(edge);
+    EXPECT_EQ(queue.Pop(), edge);
 }
 
 TEST(Performance, ProjectCase) {
