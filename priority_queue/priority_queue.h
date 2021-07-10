@@ -5,13 +5,66 @@
 #include <algorithm>
 
 template <typename T>
+class Priority {
+    private:
+        T value;
+        int priority;
+    public:
+        Priority(T value, int priority) : value(value), priority(priority) {};
+        template <typename U>
+        friend bool operator<(const Priority<U>&, const Priority<U>&);
+        template <typename U>
+        friend bool operator>(const Priority<U>&, const Priority<U>&);
+        template <typename U>
+        friend bool operator==(const Priority<U>&, const Priority<U>&);
+        template <typename U>
+        friend bool operator!=(const Priority<U>&, const Priority<U>&);
+
+        T GetValue();
+        int GetPriority();
+        //void SetPriority(int)
+};
+
+template <typename T>
+bool operator<(const Priority<T>& lhs, const Priority<T>& rhs) {
+    return lhs.priority < rhs.priority;
+}
+
+template <typename T>
+bool operator>(const Priority<T>& lhs, const Priority<T>& rhs) {
+    return rhs < lhs;
+}
+
+template <typename T>
+bool operator==(const Priority<T>& lhs, const Priority<T>& rhs) {
+    return !(lhs < rhs || rhs < lhs);
+}
+
+template <typename T>
+bool operator!=(const Priority<T>& lhs, const Priority<T>& rhs) {
+    return lhs < rhs || rhs < lhs;
+}
+
+template <typename T>
+T Priority<T>::GetValue() {
+    return this->value;
+}
+
+template <typename T>
+int Priority<T>::GetPriority() {
+    return this->priority;
+}
+
+// PriorityQueue Class
+template <typename T>
 class PriorityQueue {
     private:
-        std::vector<T> queue;
+        std::vector<Priority<T>> queue;
     public:
         PriorityQueue<T>();
-        void Push(T);
-        void Push(std::vector<T>);
+        void Push(T, int);
+        void Push(int);
+        void Push(std::vector<int>);
         T Pop();
         bool Contains(T);
         unsigned Size();
@@ -22,22 +75,28 @@ template <typename T>
 PriorityQueue<T>::PriorityQueue() {}
 
 template <typename T>
-void PriorityQueue<T>::Push(T element) {
-    this->queue.push_back(element);
-    std::sort(this->queue.begin(), this->queue.end(), std::greater<T>());
+void PriorityQueue<T>::Push(T element, int priority) {
+    this->queue.push_back(Priority(element, priority));
+    std::sort(this->queue.begin(), this->queue.end(), std::greater<Priority<T>>());
 }
 
-template <typename T>
-void PriorityQueue<T>::Push(std::vector<T> elements) {
-    for (typename std::vector<T>::iterator it = elements.begin(); it != elements.end(); it++) {
-        this->queue.push_back(*it);
+template <>
+void PriorityQueue<int>::Push(int element) {
+    this->queue.push_back(Priority(element, element));
+    std::sort(this->queue.begin(), this->queue.end(), std::greater<Priority<int>>());
+}
+
+template <>
+void PriorityQueue<int>::Push(std::vector<int> elements) {
+    for (std::vector<int>::iterator it = elements.begin(); it != elements.end(); it++) {
+        this->queue.push_back(Priority(*it, *it));
     }
-    std::sort(this->queue.begin(), this->queue.end(), std::greater<T>());
+    std::sort(this->queue.begin(), this->queue.end(), std::greater<Priority<int>>());
 }
 
 template <typename T>
 T PriorityQueue<T>::Pop() {
-    T value = this->queue.back();
+    T value = this->queue.back().GetValue();
     this->queue.pop_back();
     return(value);
 }
@@ -45,8 +104,9 @@ T PriorityQueue<T>::Pop() {
 template <typename T>
 bool PriorityQueue<T>::Contains(T element) {
     bool contains_element = false;
-    for (typename std::vector<T>::iterator it = this->queue.begin(); it != this->queue.end(); it++) {
-        if (*it == element) {
+    for (int i = 0; i < this->queue.size(); i++) {
+
+        if (this->queue[i].GetValue() == element) {
             contains_element = true;
             break;
         }

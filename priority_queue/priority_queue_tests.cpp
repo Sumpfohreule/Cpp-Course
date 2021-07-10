@@ -4,6 +4,30 @@
 #include <ctime>
 #include <vector>
 
+TEST(Priorities, LessThan) {
+    Priority p1 = Priority("D", 1);
+    Priority p2 = Priority("A", 10);
+    EXPECT_TRUE(p1 < p2);
+}
+
+TEST(Priorities, LargerThan) {
+    Priority p1 = Priority("D", 1);
+    Priority p2 = Priority("A", 10);
+    EXPECT_TRUE(p2 > p1);
+}
+
+TEST(Priorities, Equals) {
+    Priority p1 = Priority("D", 10);
+    Priority p2 = Priority("A", 10);
+    EXPECT_TRUE(p1 == p2);
+}
+
+TEST(Priorities, EqualsNot) {
+    Priority p1 = Priority("D", 1);
+    Priority p2 = Priority("A", 10);
+    EXPECT_TRUE(p1 != p2);
+}
+
 TEST(Contains, SingleElement) {
     PriorityQueue<int> queue = PriorityQueue<int>();
     queue.Push(10);
@@ -80,10 +104,31 @@ TEST(PushVector, SingleToSingle) {
     EXPECT_EQ(queue.Size(), 2);
 }
 
+TEST(PushVector, MultiToMulti) {
+    PriorityQueue<int> queue = PriorityQueue<int>();
+    std::vector<int> init = {5, 2, 8};
+    queue.Push(init);
+    std::vector<int> more = {1, 7, 4};
+    queue.Push(more);
+    EXPECT_EQ(queue.Pop(), 1);
+    EXPECT_EQ(queue.Pop(), 2);
+    EXPECT_EQ(queue.Pop(), 4);
+    EXPECT_EQ(queue.Pop(), 5);
+    EXPECT_EQ(queue.Pop(), 7);
+    EXPECT_EQ(queue.Pop(), 8);
+}
+
+TEST(PushVector, EmptyToEmpty) {
+    PriorityQueue<int> queue = PriorityQueue<int>();
+    std::vector<int> empty;
+    queue.Push(empty);
+    EXPECT_EQ(queue.Size(), 0);
+}
+
 TEST(Edge, SingleEdge) {
     PriorityQueue<Edge> queue = PriorityQueue<Edge>();
     Edge edge = Edge(0, 1);
-    queue.Push(edge);
+    queue.Push(edge,10);
     EXPECT_EQ(queue.Pop(), edge);
 }
 
