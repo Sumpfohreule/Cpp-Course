@@ -76,18 +76,18 @@ PriorityQueue<T>::PriorityQueue() {}
 
 template <typename T>
 void PriorityQueue<T>::Push(T element, int priority) {
-    this->queue.push_back(Priority(element, priority));
+    this->queue.push_back(Priority<T>(element, priority));
     std::sort(this->queue.begin(), this->queue.end(), std::greater<Priority<T>>());
 }
 
-template <>
-void PriorityQueue<int>::Push(int element) {
+template <typename T>
+void PriorityQueue<T>::Push(int element) {
     this->queue.push_back(Priority(element, element));
     std::sort(this->queue.begin(), this->queue.end(), std::greater<Priority<int>>());
 }
 
-template <>
-void PriorityQueue<int>::Push(std::vector<int> elements) {
+template <typename T>
+void PriorityQueue<T>::Push(std::vector<int> elements) {
     for (std::vector<int>::iterator it = elements.begin(); it != elements.end(); it++) {
         this->queue.push_back(Priority(*it, *it));
     }
