@@ -28,6 +28,17 @@ TEST(Priorities, EqualsNot) {
     EXPECT_TRUE(p1 != p2);
 }
 
+TEST(Priorities, GetPriority) {
+    Priority p = Priority("X", 7);
+    EXPECT_EQ(p.GetPriority(), 7);
+}
+
+TEST(Priorities, SetPriority) {
+    Priority p = Priority("X", 7);
+    p.SetPriority(11);
+    EXPECT_EQ(p.GetPriority(), 11);
+}
+
 TEST(Contains, SingleElement) {
     PriorityQueue<int> queue = PriorityQueue<int>();
     queue.Push(10);
@@ -142,6 +153,15 @@ TEST(Performance, ProjectCase) {
         queue.Pop();
     }
     EXPECT_TRUE(queue.IsEmpty());
+}
+
+TEST(ChangePriority, SetPriority) {
+    PriorityQueue<int> queue = PriorityQueue<int>();
+    queue.Push(10, 5);
+    queue.Push(20, 10);
+    queue.SetPriority(20, 1);
+    EXPECT_EQ(queue.Size(), 2);
+    EXPECT_EQ(queue.Pop(), 20);
 }
 
 int main(int argc, char **argv) {

@@ -22,7 +22,7 @@ class Priority {
 
         T GetValue();
         int GetPriority();
-        //void SetPriority(int)
+        void SetPriority(int);
 };
 
 template <typename T>
@@ -55,6 +55,12 @@ int Priority<T>::GetPriority() {
     return this->priority;
 }
 
+template <typename T>
+void Priority<T>::SetPriority(int new_priority) {
+    this->priority = new_priority;
+
+}
+
 // PriorityQueue Class
 template <typename T>
 class PriorityQueue {
@@ -69,6 +75,7 @@ class PriorityQueue {
         bool Contains(T);
         unsigned Size();
         bool IsEmpty();
+        void SetPriority(T, int);
 };
 
 template <typename T>
@@ -122,6 +129,18 @@ unsigned PriorityQueue<T>::Size() {
 template <typename T>
 bool PriorityQueue<T>::IsEmpty() {
     return(this->Size() == 0);
+}
+
+template <typename T>
+void PriorityQueue<T>::SetPriority(T element, int new_priority) {
+    for (int i = 0; i < this->queue.size(); i++) {
+        Priority<T> vec_element = this->queue[i];
+        if (vec_element.GetValue() == element) {
+            vec_element.SetPriority(new_priority);
+            this->queue[i] = vec_element;
+        }
+    }
+    std::sort(this->queue.begin(), this->queue.end(), std::greater<Priority<T>>());
 }
 
 
