@@ -1,7 +1,6 @@
 #include "graph.h"
 
 using namespace std;
-
 Graph::Graph() {}
 
 Graph::Graph(int node_count) {
@@ -40,6 +39,9 @@ int Graph::GetConnectedNode(Edge edge, int node) {
 }
 
 vector<Edge>::iterator Graph::FindEdge(int node_1, int node_2) {
+    if (node_1 > node_2) {
+        swap(node_1, node_2);
+    }
     for (vector<Edge>::iterator it = this->edges.begin(); it != this->edges.end(); it++) {
         if ((*it).node1() == node_1 && (*it).node2() == node_2) {
             return(it);
