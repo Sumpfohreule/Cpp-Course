@@ -45,9 +45,9 @@ void Graph::DeleteEdge(int node_1, int node_2) {
 bool Graph::Adjacent(int node_1, int node_2) {
     vector<Edge>::iterator it = this->FindEdge(node_1, node_2);
     if (it != this->edges.end()) {
-        return(true);
+        return true;
     } else {
-        return(false);
+        return false;
     }
 }
 
@@ -60,7 +60,7 @@ vector<int> Graph::Neighbors(int node) {
             neighbors.push_back(edge.GetOtherNode(node));
         }
     }
-    return(neighbors);
+    return neighbors;
 }
 
 void Graph::SetEdgeValue(int node_1, int node_2, int value) {
@@ -72,18 +72,18 @@ void Graph::SetEdgeValue(int node_1, int node_2, int value) {
 int Graph::GetEdgeValue(int node_1, int node_2) {
     vector<Edge>::iterator it = this->FindEdge(node_1, node_2);
     if (it != this->edges.end()) {
-        return((*it).get_weight());
+        return (*it).get_weight();
     } else {
-        return(-1);
+        return -1;
     }
 }
 
 int Graph::V() {
-    return(this->nodes.size());
+    return this->nodes.size() ;
 }
 
 int Graph::E() {
-    return(this->edges.size());
+    return this->edges.size() ;
 }
 
  // Private Methods
@@ -97,9 +97,9 @@ vector<Edge>::iterator Graph::FindEdge(int node_1, int node_2) {
     }
     for (vector<Edge>::iterator it = this->edges.begin(); it != this->edges.end(); it++) {
         if ((*it).node1() == node_1 && (*it).node2() == node_2) {
-            return(it);
+            return it;
         }
     }
-    return(this->edges.end());
+    return this->edges.end();
 }
 
