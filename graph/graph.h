@@ -3,7 +3,6 @@
 
 #include "edge/edge.h"
 #include <vector>
-#include <map>
 #include <cstdlib>
 #include <ctime>
 
@@ -12,8 +11,6 @@ class Graph {
         std::vector<int> nodes;
         std::vector<Edge> edges;
 
-        bool EdgeHasNode(Edge, int);
-        int GetConnectedNode(Edge, int);
         std::vector<Edge>::iterator FindEdge(int, int);
     public:
         Graph();

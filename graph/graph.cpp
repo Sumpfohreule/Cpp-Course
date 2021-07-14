@@ -24,20 +24,6 @@ void Graph::AddRandomEdges(float density) {
     }
 }
 
-bool Graph::EdgeHasNode(Edge edge, int node) {
-    return(edge.node1() == node || edge.node2() == node);
-}
-
-int Graph::GetConnectedNode(Edge edge, int node) {
-    if (edge.node1() == node) {
-        return(edge.node2());
-    } else if (edge.node2() == node) {
-        return(edge.node1());
-    } else {
-        return(-1);
-    }
-}
-
 vector<Edge>::iterator Graph::FindEdge(int node_1, int node_2) {
     if (node_1 > node_2) {
         swap(node_1, node_2);
@@ -103,7 +89,6 @@ int Graph::GetEdgeValue(int node_1, int node_2) {
         return(-1);
     }
 }
-
 
 int Graph::V() {
     return(this->nodes.size());
