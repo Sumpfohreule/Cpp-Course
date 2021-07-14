@@ -80,9 +80,9 @@ TEST(GraphDeleteEdge, DeleteEdgeWithWeight) {
     EXPECT_EQ(g.E(), 0);
 }
 
-TEST(EdgeConstructor, ParameterOrderDoesNotMatter) {
-    Edge small_big = Edge(3, 10);
-    Edge big_small = Edge(10, 3);
+TEST(EdgeConstructor, NodeOrderDoesNotMatter) {
+    Edge small_big = Edge(3, 10, -1);
+    Edge big_small = Edge(10, 3, -1);
     EXPECT_EQ(small_big.node1(), big_small.node1());
     EXPECT_EQ(small_big.node2(), big_small.node2());
 }

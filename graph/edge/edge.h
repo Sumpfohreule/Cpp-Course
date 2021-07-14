@@ -14,10 +14,6 @@ class Edge {
         Edge(int node_1, int node_2, int weight) : node_1(node_1), node_2(node_2), weight(weight) {
             this->OrderNodes();
         };
-        Edge(int node_1, int node_2) : node_1(node_1), node_2(node_2) {
-            this->weight = -1;
-            this->OrderNodes();
-        };
 
         int node1();
         int node2();

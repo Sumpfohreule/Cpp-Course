@@ -60,7 +60,7 @@ vector<int> Graph::Neighbors(int node) {
 }
 
 void Graph::SetEdgeValue(int node_1, int node_2, int value) {
-    Edge lookup = Edge(node_1, node_2);
+    Edge lookup = Edge(node_1, node_2, -1);
     vector<Edge>::iterator it = this->FindEdge(node_1, node_2);
     if (it != this->edges.end()) {
         *it = Edge(node_1, node_2, value);
