@@ -118,17 +118,17 @@ bool PriorityQueue<T>::Contains(T element) {
             break;
         }
     }
-    return(contains_element);
+    return contains_element;
 }
 
 template <typename T>
 unsigned PriorityQueue<T>::Size() {
-    return(this->queue.size());
+    return this->queue.size();
 }
 
 template <typename T>
 bool PriorityQueue<T>::IsEmpty() {
-    return(this->Size() == 0);
+    return this->Size() == 0;
 }
 
 template <typename T>
