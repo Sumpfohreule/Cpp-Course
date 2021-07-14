@@ -65,6 +65,13 @@ TEST(GraphEdgeValue, SetEdgeValue) {
     EXPECT_EQ(g.GetEdgeValue(1,5), 6);
 }
 
+TEST(GraphEdgeValue, SetEdgeValueReverse) {
+    Graph g = Graph(10);
+    g.AddEdge(1, 5, 4);
+    g.SetEdgeValue(5, 1, 6);
+    EXPECT_EQ(g.GetEdgeValue(1, 5), 6);
+}
+
 TEST(GraphDeleteEdge, DeleteExisting) {
     Graph g = Graph(2);
     g.AddEdge(0, 1);
