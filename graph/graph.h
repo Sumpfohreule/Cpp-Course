@@ -18,7 +18,6 @@ class Graph {
         Graph(int);
         void AddRandomEdges(float, float, float);
 
-        void AddEdge(int, int);
         void AddEdge(int, int, int);
         void DeleteEdge(int, int);
         bool Adjacent(int, int);

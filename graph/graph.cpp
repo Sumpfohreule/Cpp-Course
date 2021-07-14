@@ -24,10 +24,6 @@ void Graph::AddRandomEdges(float density, float edge_min, float edge_max) {
     }
 }
 
-void Graph::AddEdge(int node_1, int node_2) {
-    this->AddEdge(node_1, node_2, -1);
-}
-
 void Graph::AddEdge(int node_1, int node_2, int weight) {
     if (!this->Adjacent(node_1, node_2)) {
         Edge edge = Edge(node_1, node_2, weight);

@@ -21,9 +21,9 @@ TEST(GraphAddEdge, ZeroEdges) {
 
 TEST(GraphAddEdge, MultipleEdges) {
     Graph g = Graph(10);
-    g.AddEdge(0, 1);
-    g.AddEdge(1, 2);
-    g.AddEdge(2, 3);
+    g.AddEdge(0, 1, 4);
+    g.AddEdge(1, 2, 4);
+    g.AddEdge(2, 3, 4);
     EXPECT_EQ(g.E(), 3);
 }
 
@@ -41,14 +41,8 @@ TEST(GraphAdjacent, NoEdgeBetweenNodes) {
 
 TEST(GraphAdjacent, EdgeBetweenNodes) {
     Graph g = Graph(10);
-    g.AddEdge(1, 5);
+    g.AddEdge(1, 5, 4);
     EXPECT_TRUE(g.Adjacent(1, 5));
-}
-
-TEST(GraphEdgeValue, DefaultsToMinus1) {
-    Graph g = Graph(10);
-    g.AddEdge(1, 5);
-    EXPECT_EQ(g.GetEdgeValue(1, 5), -1);
 }
 
 TEST(GraphEdgeValue, GetEdgeValue) {
@@ -60,7 +54,7 @@ TEST(GraphEdgeValue, GetEdgeValue) {
 
 TEST(GraphEdgeValue, SetEdgeValue) {
     Graph g = Graph(10);
-    g.AddEdge(1, 5);
+    g.AddEdge(1, 5, 4);
     g.SetEdgeValue(1, 5, 6);
     EXPECT_EQ(g.GetEdgeValue(1,5), 6);
 }
@@ -74,7 +68,7 @@ TEST(GraphEdgeValue, SetEdgeValueReverse) {
 
 TEST(GraphDeleteEdge, DeleteExisting) {
     Graph g = Graph(2);
-    g.AddEdge(0, 1);
+    g.AddEdge(0, 1, 4);
     g.DeleteEdge(0, 1);
     EXPECT_EQ(g.E(), 0);
 }
@@ -152,9 +146,9 @@ TEST(NodeNeighbors, NodeWithoutNeighbors) {
 
 TEST(NodeNeighbors, NodeWithMultipleNeighbors) {
     Graph g = Graph(10);
-    g.AddEdge(1, 3);
-    g.AddEdge(1, 5);
-    g.AddEdge(1, 9);
+    g.AddEdge(1, 3, 4);
+    g.AddEdge(1, 5, 4);
+    g.AddEdge(1, 9, 4);
     vector<int> neighbor_nodes;
     neighbor_nodes.push_back(3);
     neighbor_nodes.push_back(5);
