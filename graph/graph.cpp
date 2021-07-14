@@ -86,6 +86,11 @@ int Graph::E() {
     return(this->edges.size());
 }
 
+ // Private Methods
+float Graph::Random(float min, float max) {
+    return (static_cast<float>(rand()) / static_cast<float>(RAND_MAX)) * max + min;
+}
+
 vector<Edge>::iterator Graph::FindEdge(int node_1, int node_2) {
     if (node_1 > node_2) {
         swap(node_1, node_2);

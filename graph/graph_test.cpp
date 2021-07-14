@@ -157,25 +157,25 @@ TEST(NodeNeighbors, NodeWithMultipleNeighbors) {
 
 TEST(RandomEdges, CreateGraphWithZeroEdges) {
     Graph g = Graph(100);
-    g.AddRandomEdges(0.0);
+    g.AddRandomEdges(0.0, 1.0, 10.0);
     EXPECT_EQ(g.E(), 0);
 }
 
 TEST(RandomEdges, CreateGraphWith10Percent) {
     Graph g = Graph(50);
-    g.AddRandomEdges(0.1);
+    g.AddRandomEdges(0.1, 1.0, 10.0);
     EXPECT_TRUE(g.E() > 72.5 && g.E() < 172.5);
 }
 
 TEST(RandomEdges, CreateGraphWith50Percent) {
     Graph g = Graph(50);
-    g.AddRandomEdges(0.5);
+    g.AddRandomEdges(0.5, 1.0, 10.0);
     EXPECT_TRUE(g.E() > 562.5 && g.E() < 662.5) ;
 }
 
 TEST(RandomEdges, CreateGraphWith100Percent) {
     Graph g = Graph(50);
-    g.AddRandomEdges(1.0);
+    g.AddRandomEdges(1.0, 1.0, 10.0);
     EXPECT_EQ(g.E(), 1225);
 }
 

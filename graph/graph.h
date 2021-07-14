@@ -11,11 +11,12 @@ class Graph {
         std::vector<int> nodes;
         std::vector<Edge> edges;
 
+        float Random(float, float);
         std::vector<Edge>::iterator FindEdge(int, int);
     public:
         Graph();
         Graph(int);
-        void AddRandomEdges(float);
+        void AddRandomEdges(float, float, float);
 
         void AddEdge(int, int);
         void AddEdge(int, int, int);
