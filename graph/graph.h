@@ -11,6 +11,7 @@ class Graph {
     private:
         std::vector<int> nodes;
         std::vector<Edge> edges;
+
         bool EdgeHasNode(Edge, int);
         int GetConnectedNode(Edge, int);
         std::vector<Edge>::iterator FindEdge(int, int);

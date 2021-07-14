@@ -112,3 +112,4 @@ int Graph::V() {
 int Graph::E() {
     return(this->edges.size());
 }
+
