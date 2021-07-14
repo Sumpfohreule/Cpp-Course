@@ -13,27 +13,15 @@ Graph::Graph(int node_count) {
     this->nodes = nodes;
 }
 
-void Graph::AddRandomEdges(float density) {
+void Graph::AddRandomEdges(float density, float edge_min, float edge_max) {
     srand(time(nullptr));
     for (int i = 0; i < this->V(); i++) {
         for (int j = i + 1; j < this->V(); j++) {
-            if (i != j && (static_cast<float>(rand()) / static_cast<float>(RAND_MAX)) < density) {
-                this->AddEdge(i, j);
+            if (i != j && this->Random(0.0, 1.0) < density) {
+                this->AddEdge(i, j, this->Random(edge_min, edge_max));
             }
         }
     }
-}
-
-vector<Edge>::iterator Graph::FindEdge(int node_1, int node_2) {
-    if (node_1 > node_2) {
-        swap(node_1, node_2);
-    }
-    for (vector<Edge>::iterator it = this->edges.begin(); it != this->edges.end(); it++) {
-        if ((*it).node1() == node_1 && (*it).node2() == node_2) {
-            return(it);
-        }
-    }
-    return(this->edges.end());
 }
 
 void Graph::AddEdge(int node_1, int node_2) {
@@ -96,5 +84,17 @@ int Graph::V() {
 
 int Graph::E() {
     return(this->edges.size());
+}
+
+vector<Edge>::iterator Graph::FindEdge(int node_1, int node_2) {
+    if (node_1 > node_2) {
+        swap(node_1, node_2);
+    }
+    for (vector<Edge>::iterator it = this->edges.begin(); it != this->edges.end(); it++) {
+        if ((*it).node1() == node_1 && (*it).node2() == node_2) {
+            return(it);
+        }
+    }
+    return(this->edges.end());
 }
 
