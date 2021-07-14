@@ -83,59 +83,8 @@ TEST(GraphDeleteEdge, DeleteEdgeWithWeight) {
 TEST(EdgeConstructor, ParameterOrderDoesNotMatter) {
     Edge small_big = Edge(3, 10);
     Edge big_small = Edge(10, 3);
-    EXPECT_TRUE(small_big == big_small);
-}
-
-TEST(EdgeComparison, LeftSmaller) {
-    Edge smaller_edge = Edge(5, 10);
-    Edge larger_edge = Edge(6, 8);
-    Edge larger_edge_2 = Edge(6, 10);
-
-    EXPECT_TRUE(smaller_edge < larger_edge);
-    EXPECT_TRUE(smaller_edge < larger_edge_2);
-}
-
-TEST(EdgeComparison, RightSmaller) {
-    Edge smaller_edge = Edge(5, 10);
-    Edge larger_edge = Edge(5, 15);
-
-    EXPECT_TRUE(smaller_edge < larger_edge);
-}
-
-TEST(EdgeComparison, LeftLarger) {
-    Edge smaller_edge = Edge(5, 10);
-    Edge larger_edge = Edge(6, 7);
-
-    EXPECT_TRUE(larger_edge > smaller_edge);
-}
-
-TEST(EdgeComparison, RightLarger) {
-    Edge smaller_edge = Edge(5, 10);
-    Edge larger_edge = Edge(5, 13);
-
-    EXPECT_TRUE(larger_edge > smaller_edge);
-}
-
-TEST(EdgeComparison, EqualUnEqual) {
-    Edge edge = Edge(1, 4);
-    Edge equal_edge = Edge(1, 4);
-    Edge unequal_edge_1 = Edge(3, 2);
-    Edge unequal_edge_2 = Edge(6, 4);
-    Edge unequal_edge_3 = Edge(1, 6);
-
-    EXPECT_EQ(edge, equal_edge);
-    EXPECT_NE(edge, unequal_edge_1);
-    EXPECT_NE(edge, unequal_edge_2);
-    EXPECT_NE(edge, unequal_edge_3);
-}
-
-TEST(EdgeComparison, WeightPrecedesNodes) {
-    Edge edge = Edge(10, 8, 5);
-    Edge smaller_edge = Edge(10, 11, 1);
-    Edge larger_edge = Edge(1, 2, 10);
-
-    EXPECT_TRUE(edge < larger_edge);
-    EXPECT_TRUE(edge > smaller_edge);
+    EXPECT_EQ(small_big.node1(), big_small.node1());
+    EXPECT_EQ(small_big.node2(), big_small.node2());
 }
 
 TEST(NodeNeighbors, NodeWithoutNeighbors) {

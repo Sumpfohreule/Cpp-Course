@@ -24,10 +24,6 @@ class Edge {
         int get_weight();
         bool ConnectsWith(int);
         int GetOtherNode(int);
-        friend bool operator<(const Edge& left, const Edge& right);
-        friend bool operator>(const Edge& left, const Edge& right);
-        friend bool operator==(const Edge& left, const Edge& right);
-        friend bool operator!=(const Edge& left, const Edge& right);
 };
 
 #endif

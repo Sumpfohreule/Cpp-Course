@@ -34,25 +34,3 @@ int Edge::GetOtherNode(int node) {
     }
 }
 
-bool operator<(const Edge& left, const Edge& right) {
-    if (left.weight != right.weight) {
-        return(left.weight < right.weight);
-    } else if (left.node_1 != right.node_1) {
-        return(left.node_1 < right.node_1);
-    } else {
-        return(left.node_2 < right.node_2);
-    }
-}
-
-bool operator>(const Edge& left, const Edge& right) {
-    return(right < left);
-}
-
-bool operator==(const Edge& left, const Edge& right) {
-    return(!(left < right || right < left));
-}
-
-bool operator!=(const Edge& left, const Edge& right) {
-    return(left < right || right < left);
-}
-
