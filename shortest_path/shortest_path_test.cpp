@@ -49,15 +49,6 @@ TEST(Path, MultipleNodesShorterThanDirect) {
     EXPECT_EQ(path.Distances(0), vec);
 }
 
-TEST(Distances, CanBeDifferentWithOtherStart) {
-    Graph g = Graph(5);
-    g.AddEdge(0, 1, 1);
-    g.AddEdge(1, 2, 1);
-    g.AddEdge(1, 4, 2);
-    g.AddEdge(1, 3, 1);
-    g.AddEdge(3, 4, 3);
-
-
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();

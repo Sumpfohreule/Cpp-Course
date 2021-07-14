@@ -8,6 +8,7 @@ class ShortestPath {
     private:
         Graph g;
     public:
+        ShortestPath(Graph g) : g(g) {};
         std::vector<int> Distances(int);
 };
 
