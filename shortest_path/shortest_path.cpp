@@ -13,17 +13,13 @@ std::vector<int> ShortestPath::Distances(int origin) {
         queue.Push(i, dist[i]);
     }
 
-    cout << "WHILE START" << endl;
     while (queue.Size() > 0) {
         int u = queue.Pop();
-        cout << "u: " << u << endl;
         vector<int> neighbors = this->g.Neighbors(u);
         
-        cout << "FOR START" << endl;
         for (vector<int>::iterator v = neighbors.begin(); v != neighbors.end(); v++) {
             if (queue.Contains(*v)) {
                 int alt = dist[u] + this->g.GetEdgeValue(u, *v);
-                cout << "\tv: " << *v << " alt: " << alt << endl;
                 if (alt < dist[*v]) {
                     dist[*v] = alt;
                     queue.SetPriority(*v, alt);
