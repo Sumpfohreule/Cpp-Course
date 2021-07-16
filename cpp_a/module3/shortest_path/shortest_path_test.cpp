@@ -9,7 +9,6 @@ TEST(Path, NoPath) {
     vector<int> vec1{0, -1};
     vector<int> vec2{-1, 0};
     EXPECT_EQ(path.Distances(0), vec1);
-    EXPECT_EQ(path.Distances(1), vec2);
 }
 
 TEST(Path, SinglePath) {

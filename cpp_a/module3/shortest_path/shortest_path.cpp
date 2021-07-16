@@ -4,6 +4,22 @@
 using namespace std;
 
 std::vector<int> ShortestPath::Distances(int origin) {
+    return this->distances;
+}
+
+float ShortestPath::AverageDistance() {
+    vector<int> dist = this->distances;
+    float no_path_count = 0;
+    for (vector<int>::iterator it = dist.begin(); it != dist.end(); it++) {
+        if (*it == -1) {
+            no_path_count++;
+        }
+    }
+    float sum = std::accumulate(dist.begin(), dist.end(), 0) + static_cast<float>(no_path_count);
+    return sum / static_cast<float>((dist.size() - no_path_count - 1));
+}
+
+void ShortestPath::CalculateDistances(int origin) {
     vector<int> dist(this->g.V(), INT_MAX);
     dist[origin] = 0;
     //vector<int> prev(this->g.V(), -1);
@@ -33,18 +49,5 @@ std::vector<int> ShortestPath::Distances(int origin) {
             *it = -1;
         }
     }
-    return dist;
+    this->distances = dist;
 }
-
-float ShortestPath::AverageDistance() {
-    vector<int> dist = this->Distances(0);
-    float no_path_count = 0;
-    for (vector<int>::iterator it = dist.begin(); it != dist.end(); it++) {
-        if (*it == -1) {
-            no_path_count++;
-        }
-    }
-    float sum = std::accumulate(dist.begin(), dist.end(), 0) + static_cast<float>(no_path_count);
-    return sum / static_cast<float>((dist.size() - no_path_count - 1));
-}
-

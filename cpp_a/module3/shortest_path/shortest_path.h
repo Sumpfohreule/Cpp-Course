@@ -7,8 +7,12 @@
 class ShortestPath {
     private:
         Graph g;
+        std::vector<int> distances;
+        void CalculateDistances(int);
     public:
-        ShortestPath(Graph g) : g(g) {};
+        ShortestPath(Graph g) : g(g) {
+            this->CalculateDistances(0);
+        };
         std::vector<int> Distances(int);
         float AverageDistance();
 };
