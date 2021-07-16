@@ -10,10 +10,10 @@ class ShortestPath {
         std::vector<int> distances;
         void CalculateDistances(int);
     public:
-        ShortestPath(Graph g) : g(g) {
-            this->CalculateDistances(0);
+        ShortestPath(Graph g, int start) : g(g) {
+            this->CalculateDistances(start);
         };
-        std::vector<int> Distances(int);
+        std::vector<int> Distances();
         float AverageDistance();
 };
 

@@ -3,7 +3,7 @@
 
 using namespace std;
 
-std::vector<int> ShortestPath::Distances(int origin) {
+std::vector<int> ShortestPath::Distances() {
     return this->distances;
 }
 
