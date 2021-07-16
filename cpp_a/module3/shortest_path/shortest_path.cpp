@@ -36,3 +36,15 @@ std::vector<int> ShortestPath::Distances(int origin) {
     return dist;
 }
 
+float ShortestPath::AverageDistance() {
+    vector<int> dist = this->Distances(0);
+    float no_path_count = 0;
+    for (vector<int>::iterator it = dist.begin(); it != dist.end(); it++) {
+        if (*it == -1) {
+            no_path_count++;
+        }
+    }
+    float sum = std::accumulate(dist.begin(), dist.end(), 0) + static_cast<float>(no_path_count);
+    return sum / static_cast<float>((dist.size() - no_path_count - 1));
+}
+

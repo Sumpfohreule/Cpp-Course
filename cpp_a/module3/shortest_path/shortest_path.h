@@ -10,6 +10,7 @@ class ShortestPath {
     public:
         ShortestPath(Graph g) : g(g) {};
         std::vector<int> Distances(int);
+        float AverageDistance();
 };
 
 #endif

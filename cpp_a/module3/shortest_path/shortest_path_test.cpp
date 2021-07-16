@@ -49,6 +49,28 @@ TEST(Path, MultipleNodesShorterThanDirect) {
     EXPECT_EQ(path.Distances(0), vec);
 }
 
+TEST(AverageDistance, OneEdge) {
+    Graph g = Graph(2);
+    g.AddEdge(0, 1, 10);
+    ShortestPath path = ShortestPath(g);
+    EXPECT_EQ(path.AverageDistance(), 10.0);
+}
+
+TEST(AverageDistance, TwoEdges) {
+    Graph g = Graph(3);
+    g.AddEdge(0, 1, 20);
+    g.AddEdge(1, 2, 31);
+    ShortestPath path = ShortestPath(g);
+    EXPECT_EQ(path.AverageDistance(), 35.5);
+}
+
+TEST(AverageDistance, SingleNodeNotConnected) {
+    Graph g = Graph(3);
+    g.AddEdge(0, 1, 20);
+    ShortestPath path = ShortestPath(g);
+    EXPECT_EQ(path.AverageDistance(), 20.0);
+}
+
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
